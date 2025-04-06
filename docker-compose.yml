@@ -12,6 +12,8 @@ services:
       - ./backend:/var/www
     networks:
       - app-network
+    entrypoint: ["sh", "/var/www/entrypoint.sh"]
+    restart: unless-stopped
       
   web:
     image: nginx:alpine

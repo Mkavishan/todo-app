@@ -2,7 +2,7 @@
 FROM php:8.3-fpm
 
 # Install system dependencies and PHP extensions
-RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zlib1g-dev libxml2-dev git unzip && \
+RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zlib1g-dev libxml2-dev git unzip netcat-openbsd && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd pdo pdo_mysql xml && \
     pecl install xdebug && \
@@ -22,6 +22,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy the Laravel application into the container
 COPY . .
+
+# Make executable entrypoint.sh
+RUN chmod +x /var/www/entrypoint.sh
 
 # Install Laravel dependencies
 # RUN composer install --no-dev --optimize-autoloader
