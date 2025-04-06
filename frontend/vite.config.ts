@@ -11,14 +11,5 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 8080
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './vitest.setup.ts',
-    coverage: {
-      provider: 'v8', // or 'istanbul'
-      reporter: ['text', 'html'], // coverage report formats
-    },
   }
 })

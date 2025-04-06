@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import {ref} from 'vue';
-import {useRouter} from 'vue-router';
 import {useTaskStore} from '../stores/taskStore';
 
 const taskStore = useTaskStore();
 const title = ref<string>('');
 const description = ref<string>('');
-const router = useRouter();
 
 const addTask = async () => {
   await taskStore.addTask(title.value, description.value);

@@ -1,9 +1,7 @@
 import {describe, it, expect, vi} from 'vitest'
-import {render, screen, fireEvent, waitFor} from '@testing-library/vue'
+import {render, screen} from '@testing-library/vue'
 import Dashboard from '../../components/Dashboard.vue'
 import {createTestingPinia} from '@pinia/testing'
-import {useTaskStore} from '../../stores/taskStore'
-import {nextTick} from 'vue'
 
 // Mock child components
 vi.mock('../../components/AddTask.vue', () => ({

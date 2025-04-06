@@ -33,6 +33,9 @@ services:
       context: ./frontend
     container_name: frontend-ui
     working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     depends_on:
       - backend
     ports:

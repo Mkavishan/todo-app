@@ -1,11 +1,11 @@
 import {setActivePinia, createPinia} from 'pinia'
-import {describe, it, expect, beforeEach, vi} from 'vitest'
+import {describe, it, expect, beforeEach, vi, type Mocked} from 'vitest'
 import axios from 'axios'
 import {useTaskStore} from '../../stores/taskStore'
 import {API_BASE_URL} from '../../global/constants';
 
 vi.mock('axios')
-const mockedAxios = axios as jest.Mocked<typeof axios>
+const mockedAxios = axios as Mocked<typeof axios>
 
 describe('taskStore', () => {
   let taskStore: ReturnType<typeof useTaskStore>;

@@ -1,14 +1,7 @@
-import {describe, it, expect, vi, beforeEach} from 'vitest'
-import {render, screen, fireEvent} from '@testing-library/vue'
+import {describe, it, expect, vi} from 'vitest'
+import {render, fireEvent} from '@testing-library/vue'
 import TaskList from '../../components/TaskList.vue'
 import {createTestingPinia} from '@pinia/testing'
-import type {Task} from '../../types/task'
-
-// Setup mock tasks
-const mockTasks: Task[] = [
-  {id: 1, title: 'Test Task 1', description: 'Desc 1', completed: false},
-  {id: 2, title: 'Test Task 2', description: 'Desc 2', completed: true}
-]
 
 describe('TaskList.vue', () => {
   it('renders a list of tasks', async () => {
