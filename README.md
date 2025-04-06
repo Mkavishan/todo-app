@@ -14,8 +14,8 @@ Ensure you have the following installed:
 ## Setup and Installation
 ### 1. Clone the Repository
 ```sh
-git clone <repository-url>
-cd <repository-folder>
+git clone https://github.com/Mkavishan/todo-app.git
+cd todo-app
 ```
 
 ### 2. Start the Application Using Docker
@@ -23,16 +23,11 @@ cd <repository-folder>
 docker-compose up -d --build
 ```
 
-### 3. Run Laravel Migrations
-```sh
-docker exec -it laravel_app php artisan migrate
-```
-
-### 4. Access the Application
+### 3. Access the Application
 - **Backend API**: `http://localhost:8000/api`
 - **Frontend UI**: `http://localhost:8080`
 
-### 5. Running Tests
+### 4. Running Tests
 To run backend tests:
 ```sh
 docker exec -it backend-api php artisan test
