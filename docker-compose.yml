@@ -10,6 +10,7 @@ services:
       - db
     volumes:
       - ./backend:/var/www
+      - /var/www/vendor
     networks:
       - app-network
     entrypoint: ["sh", "/var/www/entrypoint.sh"]
