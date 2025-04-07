@@ -15,7 +15,7 @@ onMounted(() => {
 
 <template>
   <!-- Display loading state -->
-  <div v-if="taskStore.loading" class="fixed inset-0 bg-black-100 bg-opacity-50 flex justify-center items-center z-50">
+  <div v-if="taskStore.loading" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div class="bg-white p-6 rounded-lg shadow-lg text-center">
       <span class="text-xl font-semibold">Loading...</span>
     </div>

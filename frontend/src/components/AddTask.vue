@@ -8,13 +8,15 @@ const description = ref<string>('');
 
 const addTask = async () => {
   await taskStore.addTask(title.value, description.value);
+  title.value = '';
+  description.value = '';
 };
 </script>
 
 <template>
   <div class="bg-white p-6 rounded-lg shadow-lg">
     <h2 class="text-2xl font-semibold mb-4">Add a Task</h2>
-    <form id="task-form">
+    <form id="task-form" @submit.prevent="addTask">
       <div class="mb-4">
         <input type="text" id="title" v-model="title" class="w-full p-2 border border-gray-300 rounded-md"
                placeholder="Title" required>
@@ -23,7 +25,7 @@ const addTask = async () => {
         <textarea id="description" v-model="description" class="w-full p-2 border border-gray-300 rounded-md"
                   placeholder="Description"></textarea>
       </div>
-      <button @click.prevent="addTask" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Add
+      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Add
       </button>
     </form>
   </div>

@@ -57,7 +57,7 @@ export const useTaskStore = defineStore('task', () => {
       }
     } catch (err) {
       // Handle the error and store the error message
-      error.value = 'Failed to add task. Title is a mandatory field. Please try again later.';
+      error.value = 'Failed to add task. Please try again later.';
     } finally {
       loading.value = false;
     }

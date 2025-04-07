@@ -9,7 +9,10 @@ const completeTask = (id: number) => {
 </script>
 
 <template>
-  <div v-for="task in taskStore.tasks" class="mb-4 p-4 bg-gray-100 rounded-md shadow">
+  <div v-if="!taskStore.loading && taskStore.tasks.length === 0">
+    <p class="text-center text-gray-500">No tasks available</p>
+  </div>
+  <div v-for="task in taskStore.tasks" :key="task.id" class="mb-4 p-4 bg-gray-100 rounded-md shadow">
     <h3 class="text-xl font-semibold mb-2">{{ task.title }}</h3>
 
     <div class="flex justify-between items-end">
