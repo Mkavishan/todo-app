@@ -3,8 +3,13 @@
 # Exit immediately if any command fails
 set -e
 
-# Install compose dependencies
-composer install
+# Check if vendor directory exists and if not, run composer install
+if [ ! -d "vendor" ]; then
+  echo "Running composer install..."
+  composer install --no-interaction --prefer-dist
+else
+  echo "Composer dependencies already installed."
+fi
 
 # Copy .env.example to .env if it doesn't exist
 if [ ! -f .env ]; then
