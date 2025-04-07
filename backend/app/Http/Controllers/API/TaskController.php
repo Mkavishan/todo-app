@@ -2,52 +2,65 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Enum\Messages;
-use App\Enum\Param;
+use App\Enums\Messages;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TaskRequest;
 use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
-use Illuminate\Http\Request;
+use App\Services\TaskService;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
+    public function __construct(private TaskService $taskService) {}
+
     /**
-     * Tasks list API method.
+     * Display a listing of incomplete tasks.
+     *
+     * @return TaskCollection
      */
     public function index(): TaskCollection
     {
-        return new TaskCollection(Task::where('completed', false)->latest()->take(Param::PER_PAGE->value)->get());
+        $tasks = $this->taskService->getIncompleteTasks();
+
+        return new TaskCollection($tasks);
     }
 
     /**
      * New task store method.
+     *
+     * @return JsonResponse
      */
-    public function store(TaskRequest $request): TaskResource | JsonResponse
+    public function store(TaskRequest $request): JsonResponse
     {
         try {
-            $task = Task::create($request->validated());
+            $task = $this->taskService->createTask($request->validated());
 
-            return new TaskResource($task);
+            return response()->json(['data' => new TaskResource($task)], Response::HTTP_CREATED);
         } catch (\Throwable $e) {
+            Log::error($e);
+
             return response()->json(['error' => Messages::SERVER_ERROR->value], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
     /**
-     * Update the specified Task as completed method.
+     * Update the given Task as completed method.
+     *
+     * @return JsonResponse
      */
-    public function complete(Request $request, Task $task): JsonResponse
+    public function complete(Task $task): JsonResponse
     {
         try {
-            $task->completed = true;
-            $task->save();
+            $this->taskService->markTaskAsComplete($task);
 
-            return response()->json(['message' => 'Task marked as completed']);
+            return response()->json(['message' => Messages::COMPLETED->value], Response::HTTP_OK);
         } catch (\Throwable $e) {
+            Log::error($e);
+
             return response()->json(['error' => Messages::SERVER_ERROR->value], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }

@@ -9,6 +9,9 @@ use Tests\TestCase;
 
 class TaskRequestTest extends TestCase
 {
+    /**
+     * Test valid data passes validation.
+     */
     public function test_valid_data_passes_validation(): void
     {
         $request = new TaskRequest();
@@ -22,6 +25,9 @@ class TaskRequestTest extends TestCase
         $this->assertTrue($validator->passes());
     }
 
+    /**
+     * Test invalid data fails validation.
+     */
     public function test_invalid_data_fails_validation(): void
     {
         $request = new TaskRequest();
