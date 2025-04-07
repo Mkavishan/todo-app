@@ -26,10 +26,6 @@ COPY . .
 # Make executable entrypoint.sh
 RUN chmod +x /var/www/entrypoint.sh
 
-# Install Laravel dependencies
-# RUN composer install --no-dev --optimize-autoloader
-RUN composer install
-
 # Expose port 9000 to access the backend API
 EXPOSE 9000
 

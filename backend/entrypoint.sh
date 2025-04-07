@@ -3,6 +3,9 @@
 # Exit immediately if any command fails
 set -e
 
+# Install compose dependencies
+composer install
+
 # Copy .env.example to .env if it doesn't exist
 if [ ! -f .env ]; then
   echo "Creating .env file from .env.example"
